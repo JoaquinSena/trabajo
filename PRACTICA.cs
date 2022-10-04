@@ -59,7 +59,3 @@ for (int i=0; cantidadescuela; i++)
 
 
 //hola
-
-
-
-hola de nuevo
