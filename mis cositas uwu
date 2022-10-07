@@ -1,0 +1,41 @@
+class Program{
+    public static void Main(string[] args){
+        menu();
+        Console.WriteLine("si desea ingresar un usuario ponga si, si no quiere ponga no: ");
+        string a = Console.ReadLine();
+        while(a != "no"){
+            int numero_cliente = int.Parse(Console.ReadLine());
+            string apellido = Console.ReadLine();
+            string nombre = Console.ReadLine();
+            int dni = int.Parse(Console.ReadLine());
+            DateTime fecha_de_alta = DateTime.Parse(Console.ReadLine());
+            int plan_vigente = int.Parse(Console.ReadLine());
+            Console.WriteLine("si desea ingresar otro usuario ponga si, en caso contrario ponrga no: ");
+            a = Console.ReadLine();
+            }
+    }
+    static void menu(){
+        int valor;
+        Console.WriteLine("Presione 1 para agregar cliente ");
+        Console.WriteLine("Presione 2 para Modificar la cantidad de minutos consumidos por un cliente dado");
+        Console.WriteLine("Presione 3 para Eliminar cliente de la empresa.");
+        Console.WriteLine("Presione 4 para Dada un área determinada imprimir el nombre de los técnicos asignados a la misma");
+        Console.WriteLine("Presione 5 para Listado de clientes");
+        Console.WriteLine("Presione 6 para Agregar técnico");
+        Console.WriteLine("Presione 7 para Imprimir la facturación de cada cliente en base a su plan");
+        Console.WriteLine("Presione 8 para Listado de técnicos");
+        Console.WriteLine("Presione 9 para que el programa termine");
+        valor=int.Parse(console.ReadLine());
+        while(valor != 9){
+            switch(valor){
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+            }
+        }
+    }
