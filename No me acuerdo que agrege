@@ -1,0 +1,225 @@
+using System;
+using System.Collections;
+
+namespace trabajo_practico
+{
+	class Program
+	{
+		public static void Main(string[] args)
+		{
+			menu();
+			Console.ReadKey(true);
+		}
+		static void menu_texto(){
+			Console.WriteLine("Presione 1 para agregar cliente ");
+			Console.WriteLine("Presione 2 para Modificar la cantidad de minutos consumidos por un cliente dado");
+			Console.WriteLine("Presione 3 para Eliminar cliente de la empresa.");
+			Console.WriteLine("Presione 4 para Dada un área determinada imprimir el nombre de los técnicos asignados a la misma");
+			Console.WriteLine("Presione 5 para Listado de clientes");
+			Console.WriteLine("Presione 6 para Agregar técnico");
+			Console.WriteLine("Presione 7 para Imprimir la facturación de cada cliente en base a su plan");
+			Console.WriteLine("Presione 8 para Listado de técnicos");
+			Console.WriteLine("Presione 9 para que el programa termine");
+		}
+		static void menu(){
+			int valor;
+			Console.WriteLine("Presione 1 para agregar cliente ");
+			Console.WriteLine("Presione 2 para Modificar la cantidad de minutos consumidos por un cliente dado");
+			Console.WriteLine("Presione 3 para Eliminar cliente de la empresa.");
+			Console.WriteLine("Presione 4 para Dada un área determinada imprimir el nombre de los técnicos asignados a la misma");
+			Console.WriteLine("Presione 5 para Listado de clientes");
+			Console.WriteLine("Presione 6 para Agregar técnico");
+			Console.WriteLine("Presione 7 para Imprimir la facturación de cada cliente en base a su plan");
+			Console.WriteLine("Presione 8 para Listado de técnicos");
+			Console.WriteLine("Presione 9 para que el programa termine");
+			valor=int.Parse(console.ReadLine());
+			while(valor != 9)
+			{
+				switch(valor){
+					case 1:			
+						string [] cliente = new string[]; 
+						do
+						{
+							Console.WriteLine("ingrese su numero de cliente: ");
+							cliente[0] = Console.ReadLine();
+							Console.WriteLine("ingrese su apellido: ");
+							cliente[1] = Console.ReadLine();
+							Console.WriteLine("ingrese su nombre: ");
+							cliente[2] = Console.ReadLine();
+							Console.WriteLine("ingrese su DNI: ");
+							cliente[3] = Console.ReadLine();
+							Console.WriteLine("ingrese la fecha en que se inscribio de esta forma dd/mm/aaaa: ");
+							cliente[4] = Console.ReadLine();
+							Console.WriteLine("ingrese el plan que desea: ");
+							cliente[5] = Console.ReadLine();
+							Combos.agregar(cliente);
+						}
+						Console.WriteLine("si desea ingresar otro usuario ponga si, en caso contrario ponrga no: ");
+						string a = Console.ReadLine();
+						while(a != "no")
+						{
+							Console.WriteLine("ingrese su numero de cliente: ");
+							cliente[0] = Console.ReadLine();
+							Console.WriteLine("ingrese su apellido: ");
+							cliente[1] = Console.ReadLine();
+							Console.WriteLine("ingrese su nombre: ");
+							cliente[2] = Console.ReadLine();
+							Console.WriteLine("ingrese su DNI: ");
+							cliente[3] = Console.ReadLine();
+							Console.WriteLine("ingrese la fecha en que se inscribio de esta forma dd/mm/aaaa : ");
+							cliente[4] = Console.ReadLine();
+							Console.WriteLine("ingrese el plan que desea: ");
+							cliente[5] = Console.ReadLine();
+							Combos.agregar(cliente);
+							Console.WriteLine("si desea ingresar otro usuario ponga si, en caso contrario ponrga no: ");
+							a = Console.ReadLine();
+						}
+						break;
+					case 2:
+						break;
+					case 3:
+						break;
+					case 4:
+						break;
+					case 5:
+						break;
+					case 6:
+						break;
+					case 7:
+						break;
+					case 8:
+						break;
+					default:
+						Console.WriteLine("La opcion ingresada es inexistente, por favor trate de nuevo:");
+						valor = Console.ReadLine();
+						break;
+				}
+			}
+			if (valor == 9){
+				Console.WriteLine("El programa se cerrara de inmediato.");
+			}
+			menu_texto();
+			valor=int.Parse(console.ReadLine());
+		}
+	}
+	public class Combos{
+		private DateTime oferta_tiempo = oferta_tiempo(31/12/2022); //fecha limite de la oferta
+		private string [] lista_clientes = new string[]; //se agregan todos los clientes
+		private int posi = 0 //contador para agregar clientes
+		protected DateTime fecha_usuario; //se recibe la fecha que ingresa el usuario para despues comparar
+		private int cupos_maximos = 30;
+		protected string [] cantidad_canales = new string [121]; //la lista con los nombre de los canales
+		
+		public Combos(){} //constructor
+		public Combos (string cli){ //recibe un cliente y lo asigna a un espacio en la lista de clientes
+			lista_clientes[posi] = cli;
+			posi++;
+		}
+		public Combos (DateTime fecha_usuario){ //constructor
+			this.fecha_usuario = fecha_usuario;
+		}
+		public DateTime FECHA_USUARIO{ //propiedades
+			set{ fecha_usuario = valor; }
+		}
+	}
+	
+	public class combo1 : Combos{
+		private int minutos_libre=150;
+		private int costo_minutos=3;
+		private int precio_final=450;
+		private string [] lista_promo = new string [123];
+		private DateTime f_u;
+
+		public combo1(DateTime fecha_usu) : base(fecha_usu){ //constructor
+			f_u = fecha_usu;
+		}
+		public int promocion(DateTime oferta, DateTime usuario, string [] cantidad_canales){
+			if (usuario < oferta) && (cupos_maximos < cupos_maximos++){ //las 2 posibilidades para entrar en la promo
+				lista_promo.addrange(cantidad_canales);
+				lista_promo.add("pack fútbol","Disney Channel");
+				return lista_promo;
+			}
+		}
+		public int oferta(int consumidos, int libres){
+			if (consumidos < libre*0.15){
+				precio_final = precio_final * 0.85;
+				return precio_final;
+			}
+		}
+	}
+	
+	public class combo2 : Combos{
+		private int minutos_libre=170;
+		private int costo_minutos=2;
+		private int precio_final=340;
+		private string [] lista_promo = new string [123];
+		private DateTime f_u;
+		
+		public combo2(DateTime fecha_usu) : base(fecha_usu){ //constructor
+			f_u = fecha_usu;
+		}
+		public int promocion(DateTime oferta, DateTime usuario, string [] cantidad_canales){
+			if (usuario < oferta) && (cupos_maximos < cupos_maximos++){ //las 2 posibilidades para entrar en la promo
+				lista_promo.addrange(cantidad_canales);
+				lista_promo.add("pack fútbol","Disney Channel");
+				return lista_promo;
+			}
+		}
+		public int oferta(int consumidos, int libres){
+			if (consumidos < libre*0.15){
+				precio_final = precio_final * 0.85;
+				return precio_final;
+				}
+			}
+		}
+	
+	public class combo3 : Combos{
+		private int minutos_libre=125;
+		private int costo_minutos=4;
+		private int precio_final=500;
+		private string [] lista_promo = new string [123];
+		private DateTime f_u;
+		
+		public combo3(DateTime fecha_usu) : base(fecha_usu){ //constructor
+			f_u = fecha_usu;
+		}
+		public int promocion(DateTime oferta, DateTime usuario, string [] cantidad_canales){
+			if (usuario < oferta) && (cupos_maximos < cupos_maximos++){ //las 2 posibilidades para entrar en la promo
+				lista_promo.addrange(cantidad_canales);
+				lista_promo.add("pack fútbol","Disney Channel");
+				return lista_promo;
+			}
+		}
+		public int oferta(int consumidos, int libres){
+			if (consumidos < libre*0.15){
+				precio_final = precio_final * 0.85;
+				return precio_final;
+				}
+			}
+		}
+	
+	public class combo4 : Combos{
+		private int minutos_libre=200;
+		private int costo_minutos=1.5;
+		private int precio_final=300;
+		private string [] lista_promo = new string [123];
+		private DateTime f_u;
+		
+		public combo4(DateTime fecha_usu) : base(fecha_usu){ //constructor
+			f_u = fecha_usu;
+		}
+		public int promocion(DateTime oferta, DateTime usuario, string [] cantidad_canales){
+			if (usuario < oferta) && (cupos_maximos < cupos_maximos++){ //las 2 posibilidades para entrar en la promo
+				lista_promo.addrange(cantidad_canales);
+				lista_promo.add("pack fútbol","Disney Channel");
+				return lista_promo;
+			}
+		}
+		public int oferta(int consumidos, int libres){
+			if (consumidos < libre*0.15){
+				precio_final = precio_final * 0.85;
+				return precio_final;
+				}
+			}
+		}
+}
