@@ -1,0 +1,30 @@
+int posicion = 0;
+                        	for(int contador=1; contador<cliente.Lenght; contador++)
+                            {
+                                {
+                        		if (cliente[posicion] > cliente[contador])
+                                {
+                        				posicion=contador;
+                                        }
+                                        }
+                                        return posicion;
+                                        }
+
+
+
+
+
+Console.WriteLine("ingrese su numero de cliente: ");
+                            Console.ReadLine();
+                            Console.WriteLine("ingrese su apellido: ");
+                            Console.ReadLine();
+                            Console.WriteLine("ingrese su nombre: ");
+                            Console.ReadLine();
+                            Console.WriteLine("ingrese su DNI: ");
+                            Console.ReadLine();
+                            Console.WriteLine("ingrese la fecha en que se inscribio de esta forma dd/mm/aaaa: ");
+                            Console.ReadLine();
+                            Console.WriteLine("ingrese el plan que desea: ");
+                            Console.ReadLine();
+                            Combos b = new Combos(cliente);
+                            b.agregar();
