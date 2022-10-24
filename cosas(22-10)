@@ -30,40 +30,40 @@ namespace trabajo_practico
                 switch(valor){ //todo el case 1 se copia y se pegaria a la clase cliente
                     case 1:            
                         ArrayList cliente = new ArrayList();
-                        Console.WriteLine("si desea ingresar otro usuario ponga si, en caso contrario ponrga no: ");
+                        Console.WriteLine("si desea ingresar otro usuario ponga si, en caso contrario ponga no: ");
                         string a = Console.ReadLine();
                         do
                         {
                             
                             Console.WriteLine("ingrese su numero de cliente: ");
-                            cliente[0] = Console.ReadLine();
+                            cliente.Add(Console.ReadLine());
                             Console.WriteLine("ingrese su apellido: ");
-                            cliente[1] = Console.ReadLine();
+                            cliente.Add(Console.ReadLine());
                             Console.WriteLine("ingrese su nombre: ");
-                            cliente[2] = Console.ReadLine();
+                           cliente.Add(Console.ReadLine());
                             Console.WriteLine("ingrese su DNI: ");
-                            cliente[3] = Console.ReadLine();
+                            cliente.Add(Console.ReadLine());
                             Console.WriteLine("ingrese la fecha en que se inscribio de esta forma dd/mm/aaaa: ");
-                            cliente[4] = Console.ReadLine();
+                            cliente.Add(Console.ReadLine());
                             Console.WriteLine("ingrese el plan que desea: ");
-                            cliente[5] = Console.ReadLine();
+                           cliente.Add(Console.ReadLine());
                             Combos b = new Combos(cliente);
                             b.agregar();
                         }
                         while(a != "no");
                         {
                             Console.WriteLine("ingrese su numero de cliente: ");
-                            cliente[0] = Console.ReadLine();
+                            cliente.Add(Console.ReadLine());
                             Console.WriteLine("ingrese su apellido: ");
-                            cliente[1] = Console.ReadLine();
+                            cliente.Add(Console.ReadLine());
                             Console.WriteLine("ingrese su nombre: ");
-                            cliente[2] = Console.ReadLine();
+                            cliente.Add(Console.ReadLine());
                             Console.WriteLine("ingrese su DNI: ");
-                            cliente[3] = Console.ReadLine();
+                            cliente.Add(Console.ReadLine());
                             Console.WriteLine("ingrese la fecha en que se inscribio de esta forma dd/mm/aaaa : ");
-                            cliente[4] = Console.ReadLine();
+                            cliente.Add(Console.ReadLine());
                             Console.WriteLine("ingrese el plan que desea: ");
-                            cliente[5] = Console.ReadLine();
+                            cliente.Add(Console.ReadLine());
                             Combos c = new Combos(cliente);
                             c.agregar();
                             Console.WriteLine("si desea ingresar otro usuario ponga si, en caso contrario ponrga no: ");
@@ -108,7 +108,6 @@ namespace trabajo_practico
         private DateTime oferta_tiempo= new DateTime(31/12/2022); //fecha limite de la oferta
         private ArrayList lista_clientes = new ArrayList(); //se agregan todos los clientes
         private ArrayList clientexd = new ArrayList();
-        private int posi = 0; //contador para agregar clientes
         protected DateTime fecha_usuario; //se recibe la fecha que ingresa el usuario para despues comparar
         protected int cupos_maximos = 30;
         protected int [] cantidad_canales = new int [121]; //la lista con los nombre de los canales
