@@ -40,35 +40,34 @@ namespace trabajo_practico
                    	cosa_cliente.nuevo_cliente();
                     //cosa_cliente.pasar_tele();
                     //falta verificar si hay cupo suficiente
-                    menu();
                     break;
                     case 2:
                     //cosa_telefonia.modificar(); //modificar minutos consumidos y esta relacionado con la oferta
-					menu();
+					
                     break;
                     case 3:
                     //cosa_telefonia.eliminar(); //eliminar cliente
-                    menu();
+                    
                     break;
                     case 4:
                     //cosa_tecnico.mostrar_tec_area(); //lista de tecnicos que hay en un area 
-                    menu();
+                    
                     break;
                     case 5:
                     //cosa_telefonia.mostrar_clientes();
-                    menu();
+                    
                     break;
                     case 6:
                     //cosa_tecnico.agregar_tec();
-                    menu();
+                    
                     break;
                     case 7:
                     //cosa_telefonia.facturación_cliente();
-                    menu();
+                    
                     break;
                     case 8:
                     //cosa_tecnico.mostrar_tec(); //lista completa de tecnicos
-                    menu();
+                    
                     break;
                     default:
                     Console.WriteLine("La opcion ingresada es inexistente, por favor trate de nuevo:");
@@ -79,7 +78,10 @@ namespace trabajo_practico
             if (valor == 9){
                 Console.WriteLine("El programa se cerrara de inmediato...");
             }
-            menu();
+            if (valor!=9) {
+            	menu();
+          
+            }
         }
     }
     public class el_cliente{
