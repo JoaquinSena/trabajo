@@ -1,0 +1,58 @@
+class Program
+  static void menu()
+    switch(valor)
+      case 1:
+      cosa_cliente.nuevo_cliente();
+      cosa_cliente.pasar_combo();
+      break;
+
+public class el_cliente{
+  public void pasar_combo(){ 
+    cosa_combos(un_cliente);
+    un_cliente.Clear(); 
+    cosa_combos.verificar_combo(); //verificar_combo manda de aca para alla haciendo todo lo que hay en combos
+    cosa_combos.pasar_tele(); 
+    }
+
+public class combos{
+  public combos(){}
+  public combos(ArrayList de_algo){ //cuando se llama a combos con un arraylist se recibe un cliente
+    un_cli = de_algo;
+  }
+  protected ArrayList promocion() //si no me equivoco en promocion se hace la lista de canales, esa lista la tenemos que agregar al cliente despues con un metodo
+        {
+        	if ((DateTime)un_cli[3] < oferta_tiempo) //primero se verifica si la decha ingresada por el usuario esta en la fecha de oferta
+            {
+                if (cupos_ocupados < cupos_maximos) //despues se comprueba si hay cupos suficientes, si no los hay mandamos la excepcion y todo continua normal
+                {
+                    Console.WriteLine("usted cumple con los requisitos recibir el pack futbol y el de Disney sin un cargo extra.");
+                    cant_canales = 0;
+                    while (canales.Count < 121) //capaz le pifie y capaz se agregen 122 canales, despues que alguienlo verifique xd
+                    { 
+                        canales.Add(cant_canales); //se agregan los otros 121 canales
+                        cant_canales++;
+                    } //cuando termina se le agregan los 2 canales del plus haciendo un total de 123 canales
+                    canales.Add("pack fútbol");
+                    canales.Add("Disney");
+                    un_cli.Add(canales); //ESTA PARTE AGREGE //ESTA PARTE AGREGE //ESTA PARTE AGREGE //ESTA PARTE AGREGE
+                }
+            }
+            else //si ninguna de las dos condiciones se cumplen hay que preguntar si quiere suscribirse igual
+            {
+                Console.WriteLine("¿quiere suscribirse a este combo de todas formas? Ponga si o no respectivamente: ");
+                confirmacion = Console.ReadLine();
+                if (confirmacion == "si")
+                {
+                    cant_canales = 0;
+                    while (canales.Count < 121)
+                    { 
+                        canales.Add(cant_canales); //se agregan los otros 121 canales
+                        cant_canales++;
+                    }
+                    un_cli.Add(canales); //ESTA PARTE AGREGE //ESTA PARTE AGREGE //ESTA PARTE AGREGE //ESTA PARTE AGREGE
+                    
+protected void pasar_tele(){
+  cosa_telefonia(un_cli);
+  un_cli.clear();
+  cosa_telefonia.agregar();
+  }
