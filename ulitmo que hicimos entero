@@ -57,7 +57,7 @@ namespace trabajo_practico
                     
                     break;
                     case 6:
-                    //cosa_tecnico.agregar_tec();
+                     cosa_tecnico.nuevo_tecnico();
                     
                     break;
                     case 7:
@@ -65,7 +65,7 @@ namespace trabajo_practico
                     
                     break;
                     case 8:
-                    //cosa_tecnico.mostrar_tec(); //lista completa de tecnicos
+                    Console.WriteLine(cosa_tecnico.tecnicoso);
                     
                     break;
                     case 9:
@@ -117,7 +117,16 @@ namespace trabajo_practico
         //cosas
     }
     public class tecnico{
-        //cosas
+     public ArrayList tecnicoso = new ArrayList();
+     public ArrayList nuevo_tecnico(){
+     	Console.WriteLine("nombre y apellido: ");
+     	tecnicoso.Add(Console.ReadLine());
+     	Console.WriteLine("numero de cuil: ");
+     	tecnicoso.Add(Console.ReadLine());
+     	Console.WriteLine("area a trabajar: ");
+     	tecnicoso.Add(Console.ReadLine());
+     	return tecnicoso;
+     }
     }
     public class combos{
         private DateTime oferta_tiempo = new DateTime(31/12/2022); //fecha limite de la oferta
