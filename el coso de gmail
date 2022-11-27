@@ -35,12 +35,12 @@ namespace trabajo_practico
             {case 1:
             Console.Clear();
             cosa_telefonia.nuevo_cliente(); //hace el nuevo cliente y luego invoca a otro metodo el cual pasa la informacion a telefonia 
-            //cosa_cliente.pasar_cliente_a_combos(); 
+            cosa_cliente.pasar_cliente_a_combos(); 
             cosa_combos.pasar_tele();
-            //cosa_telefonia.agregar_cliente_asignar_tecnico();
+            cosa_telefonia.agregar_cliente_asignar_tecnico();
             break;
             case 2:
-            //cosa_telefonia.cambiar_minutos_consumidos(); //modificar minutos consumidos y esta relacionado con la oferta
+            cosa_telefonia.cambiar_minutos_consumidos(); //modificar minutos consumidos y esta relacionado con la oferta
             break;
             case 3:
             cosa_telefonia.eliminar_cliente(); //eliminar cliente
