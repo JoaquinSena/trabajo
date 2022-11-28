@@ -103,9 +103,11 @@ namespace trabajo_practico
         private string area_reside; //posicion 5
         private int numero_cliente = 0; //posicion 6
         private double fact = 0; //posicion 7
-        private string tecn; //posicion 8
+         private double minu_consumi = 0; //posicion 8
+        private string tecn; //posicion 9
+        
          
-        public el_cliente(int numero_cliente,string nombre, string apellido, int DNI, DateTime dia_inscripcion,string plan_elegido,string area_reside, double fact)
+        public el_cliente(int numero_cliente,string nombre, string apellido, int DNI, DateTime dia_inscripcion,string plan_elegido,string area_reside, double fact,double minu_consumi)
         {
             this.nombre=nombre;
             this.apellido=apellido;
@@ -115,8 +117,9 @@ namespace trabajo_practico
             this.area_reside=area_reside;
             this.numero_cliente=numero_cliente;
             this.fact=fact;
+             this.minu_consumi=minu_consumi;
         }
-        public el_cliente(int numero_cliente,string nombre, string apellido, int DNI, DateTime dia_inscripcion,string plan_elegido,string area_reside, double fact, string tecn)
+        public el_cliente(int numero_cliente,string nombre, string apellido, int DNI, DateTime dia_inscripcion,string plan_elegido,string area_reside, double fact,double minu_consumi, string tecn)
         {
             this.nombre=nombre;
             this.apellido=apellido;
@@ -126,18 +129,19 @@ namespace trabajo_practico
             this.area_reside=area_reside;
             this.numero_cliente=numero_cliente;
             this.fact=fact;
+             this.minu_consumi=minu_consumi;
             this.tecn = tecn;
         }
         //metodos
         public void pasar_cliente_a_combos() //le pasa las variables a combo
         {
-            combos algito = new combos(nombre,apellido,DNI,dia_inscripcion,plan_elegido,area_reside,numero_cliente,fact);
+            combos algito = new combos(nombre,apellido,DNI,dia_inscripcion,plan_elegido,area_reside,numero_cliente,fact,minu_consumi);
             algito.verificar_combo(); 
             algito.pasar_tele();
         }
         public override string ToString()
         {
-            return string.Format("[Nombre={0}, Apellido={1}, DNI={2}, Dia_inscripcion={3}, Plan_elegido={4}, Area_reside={5}, Numero_cliente={6}, Fact={7}]", nombre, apellido, DNI, dia_inscripcion, plan_elegido, area_reside, numero_cliente, fact);
+            return string.Format("[Nombre={0}, Apellido={1}, DNI={2}, Dia_inscripcion={3}, Plan_elegido={4}, Area_reside={5}, Numero_cliente={6}, Fact={7}, Minutos_consumidos={8}]", nombre, apellido, DNI, dia_inscripcion, plan_elegido, area_reside, numero_cliente, fact,minu_consumi);
         }
     }
     public class tecnico 
@@ -175,6 +179,7 @@ namespace trabajo_practico
         private string are; //el constructor les asigna su valor
         private int num; //el constructor les asigna su valor
         private double factu; //el constructor les asigna su valor
+         private double minu_consumido;
 
         //atributos del "combo"
         private int minutos_libre;
@@ -183,7 +188,7 @@ namespace trabajo_practico
 
         //constructor
         public combos (){}
-        public combos(string nom, string ape, int dni, DateTime inscri, string plan, string are, int num, double factu)
+        public combos(string nom, string ape, int dni, DateTime inscri, string plan, string are, int num, double factu,double minu_consumido)
         {
             this.nom = nom;
             this.ape = ape;
@@ -193,6 +198,7 @@ namespace trabajo_practico
             this.are = are;
             this.num = num;
             this.factu = factu;
+             this.minu_consumido=minu_consumido;
         }
 
         //propiedades (get y set) 
@@ -212,6 +218,8 @@ namespace trabajo_practico
         {set {num = value;}get {return num;}}
         public double Facturacion
         {set {factu = value;}get {return factu;}}
+        public int Minutos_consumidos
+        {set{minu_consumido=value;}get{return minu_consumido}}
 
         //metodos
         public void verificar_combo()
@@ -323,10 +331,11 @@ namespace trabajo_practico
         private string are_cli;
         private int num_cli;
         private double factu_cli;
+        private int minu_consu_cli;
 
         //constructores
         public telefonia(){} 
-        public telefonia(string no_cli, string ap_cli, int dni_cli, DateTime ins_cli, string plan_cli, string are_cli, int num_cli, double factu_cli) //este constructor es para recibir al cliente
+        public telefonia(string no_cli, string ap_cli, int dni_cli, DateTime ins_cli, string plan_cli, string are_cli, int num_cli, double factu_cli, int minu_consu_cli) //este constructor es para recibir al cliente
         {
             this.no_cli = no_cli;
             this.ap_cli = ap_cli;
@@ -336,6 +345,7 @@ namespace trabajo_practico
             this.are_cli = are_cli;
             this.num_cli = num_cli;
             this.factu_cli = factu_cli;
+            this.minu_consu_cli=minu_consu_cli;
         }
 
         //metodos
@@ -388,14 +398,16 @@ namespace trabajo_practico
             numero_cliente++; //posicion 6
             Console.WriteLine("su numero de cliente sera: {0}",numero_cliente);
             double facturation = 0; //posicion 7
+            Console.WriteLine("ingrese sus minutos consumidos: ");
+            minu_consu_cli=int.parse(Console.ReadLine());//posicion 8
             el_cliente clin=new el_cliente(numero_cliente, nombre, apellido, DNI, dia_inscripcion, plan_elegido, area_reside, facturation);
             clin.pasar_cliente_a_combos();
             //antes de agregar debemos hacer un coso para que se le asigne un tecnico
-            foreach (tecnico mamahu in tecnicos)
+            foreach (string[] mamahu in tecnicos)
             {
-                if ((string)mamahu[area] == are_cli)
+                if (mamahu[2] == are_cli)
                 {
-                    el_cliente cosa_cliente1 == new el_cliente(no_cli,ap_cli,dni_cli,ins_cli,plan_cli,are_cli,num_cli,factu_cliv,mamahi[0]) //se hace el cliente con el nombre de su tecnico
+                    el_cliente cosa_cliente1 == new el_cliente(no_cli,ap_cli,dni_cli,ins_cli,plan_cli,are_cli,num_cli,factu_cliv,minu_consu_cli;mamahi[0]) //se hace el cliente con el nombre de su tecnico
                 }
                 else //sino, no tenemos que dejar que el cliente se anote
                 {
@@ -460,19 +472,19 @@ namespace trabajo_practico
             Console.WriteLine("ingrese el nombre de la persona :");
             string nom_p = Console.ReadLine();
             Console.WriteLine("ingrese los minutos consumidos: ");
-            int minu_consu = int.Parse(Console.ReadLine);
-            foreach (cliente k in clientes)
+            string minu_consu = Console.ReadLine();
+            foreach (string k in clientes)
             {
-                if (k[taka] == nom_p)
+                if (k[1] == nom_p)
                 {
-                    k[minutos_consu] = minu_consu;
+                    k[8] = minu_consu;
                     break;
                 }
             }
         }
         public void listaClientes()
         {
-            foreach (cliente tuse in clientes) 
+            foreach (string tuse in clientes) 
             {
                 Console.WriteLine(tuse.ToString());
             }    
