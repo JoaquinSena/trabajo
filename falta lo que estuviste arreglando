@@ -477,14 +477,14 @@ namespace trabajo_practico
             {
                 if (k[1] == nom_p)
                 {
-                    k[8] = minu_consu;
+                    k[] = minu_consu;
                     break;
                 }
             }
         }
         public void listaClientes()
         {
-            foreach (string tuse in clientes) 
+            foreach (cliente tuse in clientes) 
             {
                 Console.WriteLine(tuse.ToString());
             }    
