@@ -20,7 +20,7 @@ namespace trabajo_practico
             telefonia cosa_telefonia = new telefonia();
             //tecnico cosa_tecnico = new tecnico();
             combos cosa_combos = new combos();
-            int valor;
+            string valor;
             do
             {
                 Console.WriteLine("-------------------------------");
@@ -34,10 +34,10 @@ namespace trabajo_practico
                 Console.WriteLine("Presione 8 para Listado de técnicos");
                 Console.WriteLine("Presione 9 para salir");
                 Console.WriteLine("-------------------------------");
-                valor=int.Parse(Console.ReadLine());
+                valor = Console.ReadLine();
                 switch(valor)
                 {
-                    case 1:
+                    case "1":
                     Console.Clear();
                     cosa_telefonia.nuevo_cliente(); //hace el nuevo cliente y luego invoca a otro metodo el cual pasa la informacion a telefonia 
                     //cosa_cliente.pasar_cliente_a_combos(); 
@@ -45,38 +45,38 @@ namespace trabajo_practico
                     //cosa_telefonia.agregar_cliente_asignar_tecnico();
                     break;
     
-                    case 2:
+                    case "2":
                     //cosa_telefonia.cambiar_minutos_consumidos(); //modificar minutos consumidos y esta relacionado con la oferta
                     break;
 
-                    case 3:
+                    case "3":
                     cosa_telefonia.eliminar_cliente(); 
                     break;
 
-                    case 4:
+                    case "4":
                     cosa_telefonia.listaTecnicosArea(); //lista de tecnicos que hay en un area
                     break;
 
-                    case 5:
+                    case "5":
                     Console.Clear();
                     cosa_telefonia.listaClientes();
                     break;
     
-                    case 6:
+                    case "6":
                     Console.Clear();
                     cosa_telefonia.nuevo_tecnico();
                     break;
 
-                    case 7:
+                    case "7":
                     //cosa_telefonia.facturacion();
                     break;
 
-                    case 8:
+                    case "8":
                     Console.Clear();
                     cosa_telefonia.listaTecnicos(); //un metodo que muestre el nombre del tecnico y la zona que opera
                     break;
 
-                    case 9:
+                    case "9":
                     Console.Clear();
                     Console.WriteLine("saliendo del sistema...");
                     break;
@@ -89,7 +89,7 @@ namespace trabajo_practico
                     break;
                 }
             }
-            while(valor != 9);
+            while(valor != "9");
         }
     }
     public class el_cliente //clase cliente terminada :3
@@ -104,7 +104,7 @@ namespace trabajo_practico
         private int numero_cliente = 0; //posicion 6
         private double fact = 0; //posicion 7
          
-        public el_cliente(int numero_cliente,string nombre, string apellido, int DNI, DateTime dia_inscripcion,string plan_elegido,string area_reside)
+        public el_cliente(int numero_cliente,string nombre, string apellido, int DNI, DateTime dia_inscripcion,string plan_elegido,string area_reside, double fact)
         {
             this.nombre=nombre;
             this.apellido=apellido;
@@ -293,7 +293,8 @@ namespace trabajo_practico
         }
         public void pasar_tele()
         {
-            telefonia cosa_telefonia1 = new telefonia(nom,ape,dni,inscri,plan,are,num,factu);
+            el_cliente clin1 = new el_cliente(num,nom,ape,dni,inscri,plan,are,factu);
+            telefonia cosa_telefonia1 = new telefonia(clin1);
         }
     }
     public class telefonia //faltan los metodos >:c
@@ -302,68 +303,21 @@ namespace trabajo_practico
         private ArrayList clientes = new ArrayList();
         private ArrayList tecnicos = new ArrayList();
 
-        //atributos del tecnico
-        private string nombre_tecnico;
-        private string apellido_tecnico;
-        private string area_tecnico;
         //atributos del cliente
-        private string nombre_cliente;
-        private string apellido_cliente;
-        private int dni_cliente;
-        private DateTime inscripcion_cliente;
-        private string plan_cliente;
-        private string area_cliente;
-        private int numero_cliente;
-        private double facturacion_cliente;
+        private el_cliente lompez;
          
         //constructores
         public telefonia(){} 
-        public telefonia(string tec_nom, string tec_ape, string tec_area) //este constructor es para recibir al tecnico
+        public telefonia(el_cliente lopez) //este constructor es para recibir al cliente
         {
-            this.nombre_tecnico = tec_nom;
-            this.apellido_tecnico = tec_ape;
-            this.area_tecnico = tec_area;
+            this.lompez = lopez;
         }
-        public telefonia(string cli_nom,string cli_ape,int cli_dni, DateTime cli_ins, string cli_pla,string cli_are,int cli_num,double cli_fac) //este constructor es para recibir al cliente que viene de combo, jaja re loco
-        {
-            this.nombre_cliente = cli_nom;
-            this.apellido_cliente = cli_ape;
-            this.dni_cliente = cli_dni;
-            this.inscripcion_cliente = cli_ins;
-            this.plan_cliente = cli_pla;
-            this.area_cliente = cli_are;
-            this.numero_cliente = cli_num;
-            this.facturacion_cliente = cli_fac;
-        }
-
-        //propiedades (get y set de tecnico)
-        public string Nombre_tecnico
-        {set {nombre_tecnico = value;}get {return nombre_tecnico;}}
-        public string Apellido_tecnico
-        {set {apellido_tecnico = value;}get {return apellido_tecnico;}}
-        public string Area_tecnico
-        {set {area_tecnico = value;}get {return area_tecnico;}}
-        //propiedades (get y set de cliente)
-        public string Nombre_cliente
-        {set {nombre_cliente = value;}get {return nombre_cliente;}}
-        public string Apellido_cliente
-        {set {apellido_cliente = value;}get {return apellido_cliente;}}
-        public int Dni_cliente
-        {set {dni_cliente = value;}get {return dni_cliente;}}
-        public DateTime Inscripcion_cliente
-        {set {inscripcion_cliente = value;}get {return inscripcion_cliente;}}
-        public string Plan_cliente
-        {set {plan_cliente = value;}get {return plan_cliente;}}
-        public string Area_cliente
-        {set {area_cliente = value;}get {return area_cliente;}}
-        public int Numero_cliente
-        {set {numero_cliente = value;}get {return numero_cliente;}}
-        public double Facturacion_cliente
-        {set {facturacion_cliente = value;}get {return facturacion_cliente;}}
-
         //metodos
-        public void nuevo_cliente() //modifica las variables
+        public void nuevo_cliente() //comprobar antes de hacer el cliente si hay tecnicos
         {  
+            if (tecnicos.Count == 0){
+                Console.WriteLine("No podemos inscribirlo ya que no disponemos de tecnicos.");
+            }
             Console.WriteLine("ingrese su nombre: "); //posicion 0
             string nombre = Console.ReadLine();
             Console.WriteLine("ingrese su apellido: "); //posicion 1
@@ -378,7 +332,8 @@ namespace trabajo_practico
             Console.WriteLine("2-Berazategi");
             Console.WriteLine("3-Quilmes");
             Console.WriteLine("4-Miamiiiii");
-            int a = int.Parse(Console.ReadLine());
+            int a = int.Parse(Console.ReadLine()); 
+            int numero_cliente = 0; 
             string area_reside="";
             switch (a) 
             {
@@ -403,10 +358,25 @@ namespace trabajo_practico
                 a = int.Parse(Console.ReadLine());
                 break;
             }
-            numero_cliente++;
+            
+            numero_cliente++; //posicion 6
             Console.WriteLine("su numero de cliente sera: {0}",numero_cliente);
-            el_cliente cliente=new el_cliente(numero_cliente,nombre,apellido,DNI,dia_inscripcion,plan_elegido,area_reside);
-            clientes.Add(cliente);
+            double facturation = 0; //posicion 7
+            el_cliente clin=new el_cliente(numero_cliente, nombre, apellido, DNI, dia_inscripcion, plan_elegido, area_reside, facturation);
+            clin.pasar_cliente_a_combos();
+            //antes de agregar debemos hacer un coso para que se le asigne un tecnico
+            foreach (string[] mahu in tecnicos)
+            {
+            	if (mahu[2] == lompez[5])
+                {
+                    lompez.Add(mahu[0]); //agregar al cliente el nombre del tecnico a su cargo
+                }
+                else //sino, no tenemos que dejar que el cliente se anote
+                {
+                    string nose = "algo tenemos que hacer";
+                }
+            }
+            clientes.Add(lompez);
         }
         public void nuevo_tecnico()
         {
@@ -421,14 +391,28 @@ namespace trabajo_practico
             Console.WriteLine("4-Miamiiiii");
             int b = int.Parse(Console.ReadLine());
             string area_trabaja="";
-            if (b == 1) {area_trabaja = "Florencio varela";}
-            if (b == 2) {area_trabaja = "Berazategi";}
-            if (b == 3) {area_trabaja = "Quilmes";}
-            if (b == 4) {area_trabaja = "Miamiiiii";}
-            else
+            switch (b) 
             {
+                case 1:
+                area_trabaja = "Florencio varela";
+                break;
+
+                case 2: 
+                area_trabaja = "Berazategi";
+                break;
+
+                case 3 : 
+                area_trabaja = "Quilmes";
+                break;
+
+                case 4: 
+                area_trabaja = "Miamiiiii";
+                break;
+
+                default:
                 Console.WriteLine("El numero ingresado no coincide con ninguna de las ubicaciones, por favor intente de nuevo: ");
                 b = int.Parse(Console.ReadLine());
+                break;
             }
             tecnico tec=new tecnico(nomb,apelli,area_trabaja);
             tecnicos.Add(tec);
@@ -441,7 +425,7 @@ namespace trabajo_practico
             {
                 if (l[0] == nom_qui)
                 {
-                    Console.WriteLine("La faturacion del cliente es: {0}",l[]);
+                    Console.WriteLine("La faturacion del cliente es: {0}",l[7]);
                 }
             }
         }
