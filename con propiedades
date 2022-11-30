@@ -486,7 +486,7 @@ namespace trabajo_practico
             	
             	foreach (tecnico mamahu in tecnicos)
             	{
-                	if (mamahu.Area_traba == are_cli)
+                	if (mamahu.Area_traba == area_reside)
                 	{
                 		cosa_cliente1 = new el_cliente(num_cli,no_cli, ap_cli,dni_cli,ins_cli,plan_cli,are_cli,factu_cli,minu_consu_cli,mamahu.Area_traba); //se hace el cliente con el nombre de su tecnico
                     	clientes.Add(cosa_cliente1);
