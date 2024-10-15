@@ -1,0 +1,129 @@
+using System;
+using System.Collections;
+
+namespace Biblioteca
+{
+	public class Libro{
+		private int codigo;
+		private string titulo;
+		private string autor;
+		private string editorial;
+		private bool estado;
+		private int dniSocio;
+		
+		public int Codigo{
+			get { return codigo;}
+			set { codigo=value;}
+		}
+		public string Titulo{
+			get {return titulo;}
+			set {titulo=value;}
+		}
+		public string Autor{
+			get{return autor;}
+			set{autor=value;}
+		}
+		public string Editorial{
+			get{return editorial;}
+			set{editorial=value;}
+		}
+		public bool Estado{
+			get{return estado;}
+			set{estado=Value;}
+		}
+		public int DniSocio{
+			get{return dniSocio;}
+			set{dniSocio=value;}
+		}
+		public Libro(int codigo, string titulo, string autor, string editorial, bool estado, int dniSocio){
+			this.codigo=codigo;
+			this.titulo=titulo;
+			this.autor=autor;
+			this.editorial=editorial;
+			this.estado=estado;
+			this.dniSocio=dniSocio;
+		}
+	}
+	public class Socio{
+		protected int dni;
+		protected string nombre;
+		protected string apellido;
+		protected int telefono;
+		protected string direccion;
+		protected int cantLibrosPrestados;
+		
+		public int Dni{
+			get{return dni;}
+			set{dni=value;}
+		}
+		public string Nombre{
+			get{return nombre;}
+			set{nombre=value;}
+		}
+		public string Apellido{
+			get{return apellido;}
+			set{apellido=value;}
+		}
+		public int Telefono{
+			get{return telefono;}
+			set{telefono=value;}
+		}
+		public string Direccion{
+			get{return direccion;}
+			set{direccion=value;}
+		}
+		public int CantLibrosPrestados{
+			get{return cantLibrosPrestados;}
+			set{cantLibrosPrestados=value;}
+		}
+		public Socio(int dni, string nombre, string apellido, int telefono, string direccion, int cantLibrosPrestados){
+			this.dni=dni;
+			this.nombre=nombre;
+			this.apellido=apellido;
+			this.telefono=telefono;
+			this.direccion=direccion;
+			this.cantLibrosPrestados=cantLibrosPrestados;
+		}
+	}
+	public class LectorSala : Socio{
+		private int librosPedidos;
+		public int LibrosPedidos{
+			get{return librosPedidos;}
+			set{librosPedidos=value;}
+		}
+		public LectorSala(int librosPedidos,): base(dni, nombre, apellido, telefono, direccion, cantLibrosPrestados){
+			this.librosPedidos=librosPedidos;
+		}
+	}
+	public class Biblioteca{
+		private string nombre;
+		Libro nuevoLibro = new Libro();
+		Socio nuevoSocio = new Socio();
+		private ArrayList listaLibros = new ArrayList();
+		private ArrayList listaSocios = new ArrayList();
+		private ArrayList listaSociosLectores = new ArrayList();
+		public string Nombre{
+			get{return nombre;}
+			set{nombre=value;}
+		}
+		public ArrayList ListaLibros{
+			get{return listaLibros;}
+			set{listaLibros=value;}
+		}
+		public ArrayList ListaSocios{
+			get{return listaSocios;}
+			set{listaSoios=Value;}
+		}
+		public ArrayList ListaSociosLectores{
+			get{return listaSociosLectores;}
+			set{listaSociosLectores=value;}
+		}
+		public Biblioteca(string nombre){
+			this.nombre=nombre;
+		}
+		
+	}
+	public class menu{
+		#desarrollar
+	}
+}
