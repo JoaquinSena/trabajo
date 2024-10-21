@@ -51,6 +51,7 @@ namespace Biblioteca
 		protected int telefono;
 		protected string direccion;
 		protected int cantLibrosPrestados;
+		protected ArrayList listaLib;
 		
 		public int Dni{
 			get{return dni;}
@@ -76,6 +77,13 @@ namespace Biblioteca
 			get{return cantLibrosPrestados;}
 			set{cantLibrosPrestados=value;}
 		}
+		public ArrayList _listaLib
+		{
+			get
+			{
+				return this.listaLib;
+			}
+		}
 		public Socio(int dni, string nombre, string apellido, int telefono, string direccion, int cantLibrosPrestados){
 			this.dni=dni;
 			this.nombre=nombre;
@@ -83,16 +91,85 @@ namespace Biblioteca
 			this.telefono=telefono;
 			this.direccion=direccion;
 			this.cantLibrosPrestados=cantLibrosPrestados;
+			this.listaLib = new ArrayList();
+		}
+		public void agregarLib(Libro lib)
+		{
+			listaLib.Add(lib);
+		}
+		
+		public void eliminarLib(Libro lib)
+		{
+			listaLib.Remove(lib);
+		}
+		
+		public int cantLib()
+		{
+			return listaLib.Count;
+		}
+		
+		public Libro verLib(int pos)
+		{
+			return (Libro)listaLib[pos];
+		}
+		
+		public ArrayList todosLib()
+		{
+			return listaLib;
+		}
+		
+		public void imprimirSocio()
+		{
+			Console.WriteLine("Dni: {0}, Nombre y apellido: {1} {2}, Teléfono: {3}, Dirección: {4}, Cantidad de libros: {5}", this.numDni, this.nombre, this.apellido, this.telefono, this.direccion, this.cantidadLib);
 		}
 	}
 	public class LectorSala : Socio{
 		private int librosPedidos;
+		private ArrayList listaLibrosPrestados;
 		public int LibrosPedidos{
 			get{return librosPedidos;}
 			set{librosPedidos=value;}
 		}
+		public ArrayList _listaLibrosPrestados
+		{
+			get
+			{
+				return this.listaLibrosPrestados;
+			}
+		}
+
 		public LectorSala(int librosPedidos,): base(dni, nombre, apellido, telefono, direccion, cantLibrosPrestados){
 			this.librosPedidos=librosPedidos;
+			this.listaLibrosPrestados = new ArrayList();
+		}
+		public void agregarLibroPres(Libro lib)
+		{
+			listaLibrosPrestados.Add(lib);
+		}
+		
+		public void eliminarLibroPres(Libro lib)
+		{
+			listaLibrosPrestados.Remove(lib);
+		}
+		
+		public int cantLibroPres()
+		{
+			return listaLibrosPrestados.Count;
+		}
+		
+		public Libro verLibroPres(int pos)
+		{
+			return (Libro)listaLibrosPrestados[pos];
+		}
+		
+		public ArrayList todosLibroPres()
+		{
+			return listaLibrosPrestados;
+		}
+		
+		public void imprimirLectorSala()
+		{
+			Console.WriteLine("Dni: {0}, Nombre y apellido: {1} {2}, Teléfono: {3}, Dirección: {4}, Cantidad de libros: {5}", this.numDni, this.nombre, this.apellido, this.telefono, this.direccion, this.cantidadLib);
 		}
 	}
 	public class Biblioteca{
@@ -120,10 +197,446 @@ namespace Biblioteca
 		}
 		public Biblioteca(string nombre){
 			this.nombre=nombre;
+			this.listaLibros = new ArrayList();
+			this.listaSocios = new ArrayList();
+			this.listaLectoresSala = new ArrayList();
+		}
+		public void agregarLibro(Libro lib)
+		{
+			listaLibros.Add(lib);
+		}
+		
+		public void eliminarLibro(Libro lib)
+		{
+			listaLibros.Remove(lib);
+		}
+		
+		public int cantidadLibro()
+		{
+			return listaLibros.Count;
+		}
+		
+		public bool existeLibro(Libro lib)
+		{
+			return listaLibros.Contains(lib);
+		}
+		
+		public Libro verLibro(int pos)
+		{
+			return (Libro)listaLibros[pos];
+		}
+		
+		public ArrayList todosLibro()
+		{
+			return listaLibros;
+		}
+		
+		//6 MÉTODOS SOCIOS
+		public void altaSocio(Socio soc)
+		{
+			listaSocios.Add(soc);
+		}
+		
+		public void bajaSocio(Socio soc)
+		{
+			listaSocios.Remove(soc);
+		}
+		
+		public int cantidadSocio()
+		{
+			return listaSocios.Count;
+		}
+		
+		public bool existeSocio(Socio soc)
+		{
+			return listaSocios.Contains(soc);
+		}
+		
+		public Socio verSocio(int pos)
+		{
+			return (Socio)listaSocios[pos];
+		}
+		
+		public ArrayList todosSocio()
+		{
+			return listaSocios;
+		}	
+		
+		//6 MÉTODOS LECTOR SALA
+		public void altaLectorSala(LectorSala ls)
+		{
+			listaLectoresSala.Add(ls);
+		}
+		
+		public void bajaLectorSala(LectorSala ls)
+		{
+			listaLectoresSala.Remove(ls);
+		}
+		
+		public int cantidadLectorSala()
+		{
+			return listaLectoresSala.Count;
+		}
+		
+		public bool existeLectorSala(LectorSala ls)
+		{
+			return listaLectoresSala.Contains(ls);
+		}
+		
+		public LectorSala verLectorSala(int pos)
+		{
+			return (LectorSala)listaLectoresSala[pos];
+		}
+		
+		public ArrayList todosLectoresSala()
+		{
+			return listaLectoresSala;
 		}
 		
 	}
 	public class menu{
-		#desarrollar
-	}
+	char opción;
+			Biblioteca bib = new Biblioteca("San Martín");
+			DateTime fp1 = new DateTime(1, 1, 1);
+			DateTime soloFP1 = fp1.Date;
+			DateTime fd1 = new DateTime(1, 1, 1);
+			DateTime soloFD1 = fd1.Date;	
+			Libro l1 = new Libro(0, "0", "0", "0", "disponible", 0, soloFP1, soloFD1);
+			bib.agregarLibro(l1);
+			DateTime fp2 = new DateTime(1, 1, 1);
+			DateTime soloFP2 = fp2.Date;
+			DateTime fd2 = new DateTime(1, 1, 1);
+			DateTime soloFD2 = fd2.Date;
+			Libro l2 = new Libro(1, "1", "1", "1", "prestado", 1, soloFP2, soloFD2);
+			bib.agregarLibro(l2);
+			Socio s1 = new Socio(1, "1", "1", 1, "1", 0);
+			bib.altaSocio(s1);
+			Socio s2 = new Socio(2, "2", "2", 2, "2", 1);
+			bib.altaSocio(s2);
+			LectorSala ls1 = new LectorSala(3, "3", "3", 3, "3", 2);
+			bib.altaLectorSala(ls1);
+			LectorSala ls2 = new LectorSala(4, "4", "4", 4, "4", 3);
+			bib.altaLectorSala(ls2);
+			
+			while(true)
+			{
+				Console.WriteLine("Elija una opción con el número correspondiente:");
+				Console.WriteLine("a) Agregar un libro");
+				Console.WriteLine("b) Eliminar un libro");
+				Console.WriteLine("c) Dar de alta un socio");
+				Console.WriteLine("d) Dar de baja un socio");
+				Console.WriteLine("e) Prestar un libro");
+				Console.WriteLine("f) Devolver un libro");
+				Console.WriteLine("g) Submenú de impresión");
+				
+				opción = char.Parse(Console.ReadLine());
+				
+				switch(opción)
+				{
+				case 'a':
+					{
+						agregarUnLibro(bib);
+					}
+					break;
+				case 'b':
+					{
+						Console.WriteLine("Escriba el código del libro que desea eliminar:");
+						int c = int.Parse(Console.ReadLine());
+						eliminarUnLibro(bib, c);
+					}
+					break;
+				case 'c':
+					{
+						darAltaSocio(bib);
+					}
+					break;
+				case 'd':
+					{
+						Console.WriteLine("Escriba el documento del socio que desea eliminar:");
+						int d = int.Parse(Console.ReadLine());
+						darBajaSocio(bib, d);
+					}
+					break;
+				case 'e':
+					{
+						int doc, cod;
+						Console.WriteLine("Ingrese el número de documento del socio");
+						doc = int.Parse(Console.ReadLine());
+						Console.WriteLine("Ingrese el código del libro a prestar");
+						cod = int.Parse(Console.ReadLine());
+						
+						prestarLibro(bib, doc, cod);
+					}
+					break;
+				case 'f':
+					{
+						int cod;
+						Console.WriteLine("Ingrese el código del libro a devolver");
+						cod = int.Parse(Console.ReadLine());
+						
+						devolverLibro(bib, cod);
+					}
+					break;
+				case 'g':
+					{
+						mostrarSubmenu(bib);
+					}
+					break;
+				default:
+					{
+						Console.WriteLine("Opción no válida. Intente nuevamente");
+					}
+					break;
+				}
+				
+			}			
+		}
+		public static void agregarUnLibro(Biblioteca bib)
+		{
+			int codigo, docSoc, dia, mes, año;
+			string titulo, autor, editorial, estado;				
+			DateTime fecPres; 
+			DateTime fecDev;
+			
+			Libro lib;
+			Console.WriteLine("Ingrese el código del libro:");
+			codigo = int.Parse(Console.ReadLine());
+			Console.WriteLine("Ingrese el título del libro:");
+			titulo = Console.ReadLine();
+			Console.WriteLine("Ingrese el autor del libro:");
+			autor = Console.ReadLine();
+			Console.WriteLine("Ingrese la editorial del libro:");
+			editorial = Console.ReadLine();
+			Console.WriteLine("Ingrese el estado del libro (disponible/prestado):");
+			estado = Console.ReadLine();
+			Console.WriteLine("Ingrese el número de documento del socio que lo tiene:");
+			docSoc = int.Parse(Console.ReadLine());
+			Console.WriteLine("Ingrese el día, mes y año de la fecha de préstamo:");
+			dia = int.Parse(Console.ReadLine());
+			mes = int.Parse(Console.ReadLine());
+			año = int.Parse(Console.ReadLine());
+			fecPres = new DateTime(año, mes, dia);
+			DateTime soloFechaPres = fecPres.Date;
+			fecDev = new DateTime(año, mes, dia + 15);
+			DateTime soloFechaDev = fecDev.Date;
+			
+			lib = new Libro(codigo, titulo, autor, editorial, estado, docSoc, soloFechaPres, soloFechaDev);
+			bib.agregarLibro(lib);
+		}
+		
+		public static void eliminarUnLibro(Biblioteca bib, int cod)
+		{
+			ArrayList lisLib = new ArrayList();
+			lisLib = bib.todosLibro();
+			foreach(Libro l in lisLib)
+			{
+				if(l._codigo == cod)
+				{
+					bib.eliminarLibro(l);
+					break;
+				}
+			}
+		}
+		
+		public static void darAltaSocio(Biblioteca bib)
+		{
+			int dni, telefono, cantidadLibros, tipoSocio;
+			string nombre, apellido, direccion;
+			
+			Console.WriteLine("¿Será un Socio Lector (1) o un Lector de Sala (2)?");
+			tipoSocio = int.Parse(Console.ReadLine());
+			if(tipoSocio == 1)
+			{
+				Socio soc;
+				Console.WriteLine("Ingrese número de documento del socio:");
+				dni = int.Parse(Console.ReadLine());
+				Console.WriteLine("Ingrese el nombre del socio:");
+				nombre = Console.ReadLine();
+				Console.WriteLine("Ingrese el apellido del socio:");
+				apellido = Console.ReadLine();
+				Console.WriteLine("Ingrese el teléfono del socio:");
+				telefono = int.Parse(Console.ReadLine());
+				Console.WriteLine("Ingrese la dirección del socio:");
+				direccion = Console.ReadLine();
+				Console.WriteLine("Ingrese la cantidad de libros que tiene el socio:");
+				cantidadLibros = int.Parse(Console.ReadLine());
+			
+				soc = new Socio(dni, nombre, apellido, telefono, direccion, cantidadLibros);
+				bib.altaSocio(soc);
+			}
+			if(tipoSocio == 2)
+			{
+				LectorSala lecSala;
+				Console.WriteLine("Ingrese número de documento del socio:");
+				dni = int.Parse(Console.ReadLine());
+				Console.WriteLine("Ingrese el nombre del socio:");
+				nombre = Console.ReadLine();
+				Console.WriteLine("Ingrese el apellido del socio:");
+				apellido = Console.ReadLine();
+				Console.WriteLine("Ingrese el teléfono del socio:");
+				telefono = int.Parse(Console.ReadLine());
+				Console.WriteLine("Ingrese la dirección del socio:");
+				direccion = Console.ReadLine();
+				Console.WriteLine("Ingrese la cantidad de libros que tiene el socio:");
+				cantidadLibros = int.Parse(Console.ReadLine());
+			
+				lecSala = new LectorSala(dni, nombre, apellido, telefono, direccion, cantidadLibros);
+				bib.altaSocio(lecSala);
+				bib.altaLectorSala(lecSala);
+			}	
+		}
+		
+		public static void darBajaSocio(Biblioteca bib, int doc)
+		{
+			ArrayList lisSoc = new ArrayList();
+			ArrayList lisLS = new ArrayList();
+			lisSoc = bib.todosSocio();
+			lisLS = bib.todosLectoresSala();
+			foreach(Socio s in lisSoc)
+			{
+				if(s._numDni == doc)
+				{
+					bib.bajaSocio(s);
+					break;
+				}
+				else
+				{
+					foreach(LectorSala ls in lisLS)
+					{
+						if(ls._numDni == doc)
+						{
+							bib.bajaLectorSala(ls);
+							break;
+						}
+					}
+				}
+			}
+		}
+		
+		public static void prestarLibro(Biblioteca bib, int doc, int cod)
+		{
+			ArrayList lisSoc = bib.todosSocio();
+			ArrayList lisLecSala = bib.todosLectoresSala();
+			ArrayList lisLib = bib.todosLibro();
+			foreach(Libro l in lisLib)
+			{
+				if(l._codigo == cod && l._estado == "disponible")
+				{
+					foreach(LectorSala ls in lisLecSala)
+					{
+						if(doc == ls._numDni && ls._cantidadLib < 3)
+							{
+								l._estado = "prestado";
+								ls._cantidadLib = ls._cantidadLib + 1;
+								l._dniSocio = ls._numDni;
+								ls.agregarLibroPres(l);
+							}
+					}
+					foreach(Socio s in lisSoc)
+					{
+						if(doc == s._numDni && s._cantidadLib == 0)
+						{
+							l._estado = "prestado";
+							l._dniSocio = s._numDni;
+							s._cantidadLib = s._cantidadLib + 1;
+						}
+					}
+				}
+			}
+		}
+		
+		public static void devolverLibro(Biblioteca bib, int cod)
+		{
+			ArrayList lisSoc = bib.todosSocio();
+			ArrayList lisLecSala = bib.todosLectoresSala();
+			ArrayList lisLib = bib.todosLibro();
+			foreach(Libro l in lisLib)
+			{
+				if(l._codigo == cod && l._estado == "prestado")
+				{
+					foreach(Socio s in lisSoc)
+					{
+						if(s._numDni == l._dniSocio && s._cantidadLib > 0)
+						{
+							s._cantidadLib = s._cantidadLib - 1;
+						}
+					}
+					foreach(LectorSala ls in lisLecSala)
+					{
+						if(ls._numDni == l._dniSocio && ls._cantidadLib > 0)
+						{
+							ls._cantidadLib = ls._cantidadLib - 1;
+							ls.eliminarLibroPres(l);
+						}
+					}
+					l._estado = "disponible";
+					l._dniSocio = 0;
+				}
+			}
+		}
+		
+		public static void mostrarSubmenu(Biblioteca bib)
+		{
+			int opc;
+			ArrayList lisLecSala = new ArrayList();
+						
+			Console.WriteLine("Elija una opción con el número correspondiente:");
+			Console.WriteLine("1) Imprimir socios");
+			Console.WriteLine("2) Imprimir lectores sala");
+			Console.WriteLine("3) Imprimir libros");
+			Console.WriteLine("4) Imprimir libros prestados");
+			opc = int.Parse(Console.ReadLine());
+						
+			switch(opc)
+			{
+				case 1:
+					{
+						ArrayList lisSoc = new ArrayList();
+						lisSoc = bib.todosSocio();
+						foreach(Socio s in lisSoc)
+						{
+							s.imprimirSocio();
+						}
+					}
+					break;
+				case 2:
+					{
+						ArrayList lisLec = new ArrayList();
+						lisLec = bib.todosLectoresSala();
+						foreach(LectorSala ls in lisLec)
+						{
+							ls.imprimirSocio();
+						}
+					}
+					break;
+				case 3:
+					{
+						ArrayList lisLib = new ArrayList();
+						lisLib = bib.todosLibro();
+						foreach(Libro l in lisLib)
+						{
+							l.imprimirLibro();
+						}
+					}
+					break;
+				case 4:
+					{
+						ArrayList lisLib = new ArrayList();
+						lisLib = bib.todosLibro();
+						foreach(Libro l in lisLib)
+						{
+							if(l._estado == "prestado")
+							{
+								l.imprimirLibro();
+							}
+						}
+					}
+					break;
+				default:
+					{
+						Console.WriteLine("Opción no válida");
+					}
+					break;
+			}
+		}
 }
